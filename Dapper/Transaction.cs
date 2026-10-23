@@ -39,6 +39,21 @@ public class Transaction : ITransaction
         _transaction.Rollback();
     }
 
+    public Task<T?> FirstOrDefault<T>(IQueryObject queryObject)
+    {
+        return _connection.QueryFirstOrDefaultAsync<T>(queryObject.Sql, queryObject.Parameters, _transaction);
+    }
+
+    public async Task<List<T>> ListOrEmpty<T>(IQueryObject queryObject)
+    {
+        return (await _connection.QueryAsync<T>(queryObject.Sql, queryObject.Parameters, _transaction).ConfigureAwait(false)).AsList();
+    }
+
+    public Task<int> CommandWithCount(IQueryObject queryObject)
+    {
+        return _connection.ExecuteAsync(queryObject.Sql, queryObject.Parameters, _transaction);
+    }
+
     public async Task Command(IQueryObject queryObject)
     {
         await _connection.ExecuteAsync(queryObject.Sql, queryObject.Parameters, _transaction);

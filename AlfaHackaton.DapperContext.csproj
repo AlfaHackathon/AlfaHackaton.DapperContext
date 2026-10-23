@@ -5,11 +5,17 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <PackageId>AlfaHackaton.DapperContext</PackageId>
-        <Version>1.1.0</Version>
+        <Version>1.2.0</Version>
         <Authors>artokit</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/AlfaHackaton/AlfaHackaton.DapperContext</RepositoryUrl>
     </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Remove="Tests/**/*.cs" />
+        <None Update="README.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Dapper" Version="2.1.66" />
